@@ -142,6 +142,13 @@ const config = {
         // return '校验失败'  // 返回字符串即表示失败的提示信息
     },
 
+    // 插入网络视频的校验
+    linkVideoCheck: function (src) {
+        // src 即图片的地址
+        return true // 返回 true 即表示成功
+        // return '校验失败'  // 返回字符串即表示失败的提示信息
+    },
+
     // 粘贴过滤样式，默认开启
     pasteFilterStyle: true,
 
@@ -169,6 +176,11 @@ const config = {
         // console.log(url)  // url 即插入图片的地址
     },
 
+    // 插入网络视频的回调
+    linkVideoCallback: function (url) {
+        // console.log(url)  // url 即插入视频的地址
+    },
+
     // 默认上传图片 max size: 5M
     uploadImgMaxSize: 5 * 1024 * 1024,
 
@@ -194,13 +206,38 @@ const config = {
         // 'Accept': 'text/x-json'
     },
 
+    // 自定义视频配置 filename
+    uploadVideoFileName: '',
+
+    // 上传视频，server 地址
+    uploadVideoServer: '',
+
+    // 默认上传视频 max size: 50M
+    uploadVideoMaxSize: 50 * 1024 * 1024,
+
+    // 配置一次最多上传几个视频
+    uploadVideoMaxLength: 5,
+
+    // 上传视频的自定义参数
+    uploadVideoParams: {
+
+    },
+
+    // 上传视频的自定义header
+    uploadVideoHeaders: {
+
+    },
+
+    // 自定义上传视频超时时间ms
+    uploadVideoTimeout: 100000,
+
     // 配置 XHR withCredentials
     withCredentials: false,
 
     // 自定义上传图片超时时间 ms
     uploadImgTimeout: 10000,
 
-    // 上传图片 hook 
+    // 上传图片 hook
     uploadImgHooks: {
         // customInsert: function (insertLinkImg, result, editor) {
         //     console.log('customInsert')
@@ -233,6 +270,32 @@ const config = {
         }
     },
 
+    // // 自定义上传视频
+    // customUploadVideo: function (files, insert) {
+    //     // files 是 input 中选中的文件列表
+    //     // insert 是获取视频 url 后，插入到编辑器的方法
+    //     insert(videoUrl)
+    // }
+
+    // 上传视频 hook
+    uploadVideoHooks: {
+        before: function(xhr, editor, files) {
+            // 视频上传之前触发
+        },
+        success: function(xhr, editor, result) {
+            // 视频上传并返回结果，视频插入成功之后触发
+        },
+        fail: function(xhr, editor, result) {
+            // 视频上传并返回结果，但视频插入错误时触发
+        },
+        error: function(xhr, editor) {
+            // 视频上传出错时触发
+        },
+        timeout: function(xhr, editor) {
+            // 视频上传超时时触发
+        }
+    },
+
     // 是否上传七牛云，默认为 false
     qiniu: false,
 
@@ -240,7 +303,7 @@ const config = {
     // customAlert: function (info) {
     //     // 自定义上传提示
     // },
-    
+
     // // 自定义上传图片
     // customUploadImg: function (files, insert) {
     //     // files 是 input 中选中的文件列表

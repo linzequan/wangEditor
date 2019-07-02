@@ -82,7 +82,7 @@ router.post('/upload-img', function* () {
 app.use(router.routes()).use(router.allowedMethods());
 
 // 启动服务
-app.listen(3000)
-console.log('listening on port %s', 3000)
+app.listen(5000)
+console.log('listening on port %s', 5000)
 
 module.exports = app

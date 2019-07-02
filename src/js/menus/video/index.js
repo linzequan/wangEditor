@@ -27,12 +27,65 @@ Video.prototype = {
         // 创建 id
         const textValId = getRandom('text-val')
         const btnId = getRandom('btn')
+        const upTriggerId = getRandom('up-trigger')
+        const upFileId = getRandom('up-file')
+        const uploadVideo = this.editor.uploadVideo
 
         // 创建 panel
         const panel = new Panel(this, {
             width: 350,
             // 一个 panel 多个 tab
             tabs: [
+                {
+                    title: '上传视频',
+                    tpl: `<div class="w-e-up-img-container">
+                        <div id="${upTriggerId}" class="w-e-up-btn">
+                            <i class="w-e-icon-upload2"></i>
+                        </div>
+                        <div style="display:none;">
+                            <input id="${upFileId}" type="file" multiple="multiple" accept="video/*"/>
+                        </div>
+                    </div>`,
+                    events: [
+                        {
+                            // 触发选择视频
+                            selector: '#' + upTriggerId,
+                            type: 'click',
+                            fn: () => {
+                                const $file = $('#' + upFileId)
+                                const fileElem = $file[0]
+                                if (fileElem) {
+                                    fileElem.click()
+                                } else {
+                                    // 返回 true 可关闭 panel
+                                    return true
+                                }
+                            }
+                        },
+                        {
+                            // 选择视频完毕
+                            selector: '#' + upFileId,
+                            type: 'change',
+                            fn: () => {
+                                const $file = $('#' + upFileId)
+                                const fileElem = $file[0]
+                                if (!fileElem) {
+                                    // 返回 true 可关闭 panel
+                                    return true
+                                }
+
+                                // 获取选中的 file 对象列表
+                                const fileList = fileElem.files
+                                if (fileList.length) {
+                                    uploadVideo.uploadVideo(fileList)
+                                }
+
+                                // 返回 true 可关闭 panel
+                                return true
+                            }
+                        }
+                    ]
+                }, // first tab end
                 {
                     // 标题
                     title: '插入视频',
