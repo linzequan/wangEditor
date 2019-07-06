@@ -562,39 +562,50 @@ var config = {
     // },
 
     // 表情
-    emotions: [{
-        // tab 的标题
-        title: '默认',
-        // type -> 'emoji' / 'image'
-        type: 'image',
-        // content -> 数组
-        content: [{
-            alt: '[坏笑]',
-            src: 'http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/50/pcmoren_huaixiao_org.png'
-        }, {
-            alt: '[舔屏]',
-            src: 'http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/40/pcmoren_tian_org.png'
-        }, {
-            alt: '[污]',
-            src: 'http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/3c/pcmoren_wu_org.png'
-        }]
-    }, {
-        // tab 的标题
-        title: '新浪',
-        // type -> 'emoji' / 'image'
-        type: 'image',
-        // content -> 数组
-        content: [{
-            src: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/7a/shenshou_thumb.gif',
-            alt: '[草泥马]'
-        }, {
-            src: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/60/horse2_thumb.gif',
-            alt: '[神马]'
-        }, {
-            src: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/bc/fuyun_thumb.gif',
-            alt: '[浮云]'
-        }]
-    }, {
+    emotions: [
+    // {
+    //     // tab 的标题
+    //     title: '默认',
+    //     // type -> 'emoji' / 'image'
+    //     type: 'image',
+    //     // content -> 数组
+    //     content: [
+    //         {
+    //             alt: '[坏笑]',
+    //             src: 'http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/50/pcmoren_huaixiao_org.png'
+    //         },
+    //         {
+    //             alt: '[舔屏]',
+    //             src: 'http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/40/pcmoren_tian_org.png'
+    //         },
+    //         {
+    //             alt: '[污]',
+    //             src: 'http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/3c/pcmoren_wu_org.png'
+    //         }
+    //     ]
+    // },
+    // {
+    //     // tab 的标题
+    //     title: '新浪',
+    //     // type -> 'emoji' / 'image'
+    //     type: 'image',
+    //     // content -> 数组
+    //     content: [
+    //         {
+    //             src: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/7a/shenshou_thumb.gif',
+    //             alt: '[草泥马]'
+    //         },
+    //         {
+    //             src: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/60/horse2_thumb.gif',
+    //             alt: '[神马]'
+    //         },
+    //         {
+    //             src: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/bc/fuyun_thumb.gif',
+    //             alt: '[浮云]'
+    //         }
+    //     ]
+    // },
+    {
         // tab 的标题
         title: 'emoji',
         // type -> 'emoji' / 'image'
