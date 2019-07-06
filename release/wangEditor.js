@@ -4163,7 +4163,7 @@ UploadImg.prototype = {
             }
         }
 
-        editor.cmd.do('insertHTML', '<img src="' + link + '" style="max-width:100%;"/>');
+        editor.cmd.do('insertHTML', '<div style="display:block;text-align: center;position: relative;"><img src="' + link + '" style="max-width:100%;"/></div>');
 
         // 验证图片 url 是否有效，无效的话给出提示
         var img = document.createElement('img');
@@ -4179,10 +4179,16 @@ UploadImg.prototype = {
             img = null;
             // 无法成功下载图片
             _this2._alert('插入图片错误', 'wangEditor: \u63D2\u5165\u56FE\u7247\u51FA\u9519\uFF0C\u56FE\u7247\u94FE\u63A5\u662F "' + link + '"\uFF0C\u4E0B\u8F7D\u8BE5\u94FE\u63A5\u5931\u8D25');
+            if (callback && typeof callback === 'function') {
+                callback(link);
+            }
             return;
         };
         img.onabort = function () {
             img = null;
+            if (callback && typeof callback === 'function') {
+                callback(link);
+            }
         };
         img.src = link;
     },
@@ -4481,7 +4487,7 @@ UploadVideo.prototype = {
         }
 
         // <p><span class="fr-video fr-dvb fr-draggable" contenteditable="false" draggable="true"><video class="fr-draggable" controls="" src="https://cdn.yzs520.com/fileidc/0/1/2019-07-02/1562037181484_1561736245755696.mp4" style="width: 600px;">您的浏览器不支持 HTML5 视频。</video></span></p>
-        editor.cmd.do('insertHTML', '<span style="display:block;text-align: center;position: relative;" contenteditable="false" draggable="true"><video controls="" src="' + link + '" style="max-width:100%; width:600px;">\u60A8\u7684\u6D4F\u89C8\u5668\u4E0D\u652F\u6301 HTML5 \u89C6\u9891\u3002</video></span>');
+        editor.cmd.do('insertHTML', '<div style="display:block;text-align: center;position: relative;" contenteditable="false" draggable="true"><video controls="" src="' + link + '" style="max-width:100%; width:600px;">\u60A8\u7684\u6D4F\u89C8\u5668\u4E0D\u652F\u6301 HTML5 \u89C6\u9891\u3002</video></div>');
 
         // 验证视频 url 是否有效，无效的话给出提示
         var video = document.createElement('video');
@@ -4497,10 +4503,16 @@ UploadVideo.prototype = {
             video = null;
             // 无法成功下载图片
             _this._alert('插入视频错误', 'wangEditor: \u63D2\u5165\u89C6\u9891\u51FA\u9519\uFF0C\u89C6\u9891\u94FE\u63A5\u662F "' + link + '"\uFF0C\u4E0B\u8F7D\u8BE5\u94FE\u63A5\u5931\u8D25');
+            if (callback && typeof callback === 'function') {
+                callback(link);
+            }
             return;
         };
         video.onabort = function () {
             video = null;
+            if (callback && typeof callback === 'function') {
+                callback(link);
+            }
         };
         video.src = link;
     },
@@ -4576,7 +4588,7 @@ UploadVideo.prototype = {
 
         // ------------------------------ 自定义上传 ------------------------------
         if (customUploadVideo && typeof customUploadVideo === 'function') {
-            customUploadVideo(resultFiles, this.insertLinkImg.bind(this));
+            customUploadVideo(resultFiles, this.insertLinkVideo.bind(this));
 
             // 阻止以下代码执行
             return;

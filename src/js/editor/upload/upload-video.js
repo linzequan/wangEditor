@@ -54,7 +54,7 @@ UploadVideo.prototype = {
         }
 
         // <p><span class="fr-video fr-dvb fr-draggable" contenteditable="false" draggable="true"><video class="fr-draggable" controls="" src="https://cdn.yzs520.com/fileidc/0/1/2019-07-02/1562037181484_1561736245755696.mp4" style="width: 600px;">您的浏览器不支持 HTML5 视频。</video></span></p>
-        editor.cmd.do('insertHTML', `<span style="display:block;text-align: center;position: relative;" contenteditable="false" draggable="true"><video controls="" src="${link}" style="max-width:100%; width:600px;">您的浏览器不支持 HTML5 视频。</video></span>`)
+        editor.cmd.do('insertHTML', `<div style="display:block;text-align: center;position: relative;" contenteditable="false" draggable="true"><video controls="" src="${link}" style="max-width:100%; width:600px;">您的浏览器不支持 HTML5 视频。</video></div>`)
 
         // 验证视频 url 是否有效，无效的话给出提示
         let video = document.createElement('video')
@@ -70,10 +70,16 @@ UploadVideo.prototype = {
             video = null
             // 无法成功下载图片
             this._alert('插入视频错误', `wangEditor: 插入视频出错，视频链接是 "${link}"，下载该链接失败`)
+            if (callback && typeof callback === 'function') {
+                callback(link)
+            }
             return
         }
         video.onabort = () => {
             video = null
+            if (callback && typeof callback === 'function') {
+                callback(link)
+            }
         }
         video.src = link
     },
@@ -147,7 +153,7 @@ UploadVideo.prototype = {
 
         // ------------------------------ 自定义上传 ------------------------------
         if (customUploadVideo && typeof customUploadVideo === 'function') {
-            customUploadVideo(resultFiles, this.insertLinkImg.bind(this))
+            customUploadVideo(resultFiles, this.insertLinkVideo.bind(this))
 
             // 阻止以下代码执行
             return

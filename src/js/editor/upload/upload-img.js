@@ -52,7 +52,7 @@ UploadImg.prototype = {
             }
         }
 
-        editor.cmd.do('insertHTML', `<img src="${link}" style="max-width:100%;"/>`)
+        editor.cmd.do('insertHTML', `<div style="display:block;text-align: center;position: relative;"><img src="${link}" style="max-width:100%;"/></div>`)
 
         // 验证图片 url 是否有效，无效的话给出提示
         let img = document.createElement('img')
@@ -68,10 +68,16 @@ UploadImg.prototype = {
             img = null
             // 无法成功下载图片
             this._alert('插入图片错误', `wangEditor: 插入图片出错，图片链接是 "${link}"，下载该链接失败`)
+            if (callback && typeof callback === 'function') {
+                callback(link)
+            }
             return
         }
         img.onabort = () => {
             img = null
+            if (callback && typeof callback === 'function') {
+                callback(link)
+            }
         }
         img.src = link
     },
